@@ -1,0 +1,26 @@
+package main_pack;
+
+import java.util.regex.*;
+
+public class EliminateDuplicatedWord {
+
+	public static void main(String[] args) {
+		String regexString = "\\b(\\w+)(?:\\W+\\1\\b)+";
+		String wordString = "Goodbye bye bye world world world";
+		String newString = "";
+		
+		Pattern pattern = Pattern.compile(regexString);
+		Matcher matcher = pattern.matcher(wordString);
+		
+		
+		int i = 0;
+		while(matcher.find()) {
+			System.out.println(i + " " + matcher.group());
+			i++;
+			newString = wordString.replaceAll(matcher.group(), matcher.group(1));
+			System.out.println("--> " + newString);
+		}
+
+	}
+
+}

@@ -1,0 +1,43 @@
+package main_code;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Random;
+
+
+public class Combination {
+	
+	
+	
+	
+	public static void main(String[] args) {
+		
+		ArrayList<String> already_generatedArrayList = new ArrayList<>();
+		ArrayList<Integer> numList = new ArrayList<>();
+		for(int i = 5; i <= 9; i++) {
+			numList.add(i);
+		}
+		
+		for (int j = 0; j < 100; j++) {
+			Collections.shuffle(numList);
+			StringBuilder stringBuilder = new StringBuilder()
+					.append(numList.get(0))
+					.append(numList.get(1))
+					.append(numList.get(2))
+					.append(numList.get(3));
+			String number_generatedString = stringBuilder.toString();
+			if(already_generatedArrayList.isEmpty()) {
+				already_generatedArrayList.add(number_generatedString);
+				continue;
+			} else {
+				if(!already_generatedArrayList.contains(number_generatedString)) {
+					System.out.println(stringBuilder.toString());
+				} else {
+					System.out.println("---------" + number_generatedString);
+					continue;
+				}
+			}
+		}
+	}
+}

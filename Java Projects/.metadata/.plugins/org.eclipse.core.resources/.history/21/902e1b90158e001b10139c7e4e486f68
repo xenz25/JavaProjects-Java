@@ -1,0 +1,59 @@
+package main_code;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Random;
+
+
+public class Combination {
+	public static int permu(int sample) {
+		int permutation = 1;
+		for(int i = sample; i >= 1; i--) {
+			permutation*=i;
+		}
+		return permutation;
+	}
+	
+	public static int max_correct_guess(int number_of_sample) {
+		return permu(number_of_sample) / permu(number_of_sample - 4);
+	}
+	
+	public static void main(String[] args) {
+		ArrayList<String> already_generatedArrayList = new ArrayList<>();
+		ArrayList<Integer> numList = new ArrayList<>();
+		for(int i = 5; i <= 9; i++) {
+			numList.add(i);
+		}
+		
+		int correct_guess = 0, max_num = max_correct_guess(numList.size());
+		
+		System.out.println("All unique 4 digit numbers from list: 5,6,7,8,9");
+	
+		for (;;) {
+			if(already_generatedArrayList.size() == max_num) {
+				break;
+			}
+			Collections.shuffle(numList); //shuffle list
+			StringBuilder stringBuilder = new StringBuilder()
+					.append(numList.get(0))
+					.append(numList.get(1))
+					.append(numList.get(2))
+					.append(numList.get(3));
+			String number_generatedString = stringBuilder.toString(); //Concatenate each 1-4 number
+			
+			if(already_generatedArrayList.isEmpty()) {
+				//if empty at first add then continue
+				already_generatedArrayList.add(number_generatedString);
+				continue;
+			} else {
+				//if not empty proceed checking 
+				if(!already_generatedArrayList.contains(number_generatedString)) { //if not contains - unique
+					correct_guess++;
+					already_generatedArrayList.add(number_generatedString);
+					System.out.println(already_generatedArrayList.size() + "  "+ stringBuilder.toString());
+				}
+			}
+		}
+	}
+}

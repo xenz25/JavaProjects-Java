@@ -1,0 +1,50 @@
+package main_code;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Random;
+
+
+public class Combination {
+	
+	
+	
+	
+	public static void main(String[] args) {
+		int number_off_wrong_guess = 0;
+		ArrayList<String> already_generatedArrayList = new ArrayList<>();
+		ArrayList<Integer> numList = new ArrayList<>();
+		for(int i = 5; i <= 9; i++) {
+			numList.add(i);
+		}
+		
+		for (;;) {
+			if(number_off_wrong_guess > 100) {
+				if(already_generatedArrayList.size() < number_off_wrong_guess) {
+					break;
+				}
+			}
+			Collections.shuffle(numList);
+			StringBuilder stringBuilder = new StringBuilder()
+					.append(numList.get(0))
+					.append(numList.get(1))
+					.append(numList.get(2))
+					.append(numList.get(3));
+			String number_generatedString = stringBuilder.toString();
+			if(already_generatedArrayList.isEmpty()) {
+				already_generatedArrayList.add(number_generatedString);
+				continue;
+			} else {
+				if(!already_generatedArrayList.contains(number_generatedString)) {
+					already_generatedArrayList.add(number_generatedString);
+					System.out.println(stringBuilder.toString());
+				} else {
+					System.err.println(number_generatedString + "[" + already_generatedArrayList.indexOf(number_generatedString) + "]");
+					number_off_wrong_guess++;
+					continue;
+				}
+			}
+		}
+	}
+}
